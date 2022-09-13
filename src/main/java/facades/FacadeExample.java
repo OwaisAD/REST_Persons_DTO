@@ -52,6 +52,7 @@ public class FacadeExample {
         }
         return new RenameMeDTO(rme);
     }
+
     public RenameMeDTO getById(long id) { //throws RenameMeNotFoundException {
         EntityManager em = emf.createEntityManager();
         RenameMe rm = em.find(RenameMe.class, id);
