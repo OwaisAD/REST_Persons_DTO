@@ -13,7 +13,6 @@ import java.util.Objects;
 
 public class PersonsDTO {
     List<PersonDTO> all = new ArrayList<>();
-
     public PersonsDTO(List<Person> personEntities) {
         personEntities.forEach(p -> all.add(new PersonDTO(p)));
     }

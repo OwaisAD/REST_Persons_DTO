@@ -59,7 +59,7 @@ public class PersonFacade implements IPersonFacade {
     }
 
     @Override
-    public PersonDTO deletePerson(int id) {
+    public PersonDTO deletePerson(int id) { // SKAL DENNE VIRKELIG RETURNE PERSONDTO? boolean?
         /*EntityManager em = emf.createEntityManager();
         Person fromDB = em.find(Person.class, id);
 
@@ -75,17 +75,33 @@ public class PersonFacade implements IPersonFacade {
             em.close();
         }
         return*/
-        return null;
+            return null;
     }
 
     @Override
     public PersonDTO getPerson(int id) {
-        return null;
+        EntityManager em = emf.createEntityManager();
+        Person fromDB = em.find(Person.class, id);
+
+        if(fromDB == null) {
+            throw new EntityNotFoundException("No such person with id: " + id);
+        }
+
+        return new PersonDTO(fromDB);
     }
 
     @Override
     public PersonsDTO getAllPersons() {
-        return null;
+
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+            PersonsDTO personsDTO = new PersonsDTO(query.getResultList());
+            return personsDTO;
+        }finally {
+            em.close();
+        }
     }
 
     @Override

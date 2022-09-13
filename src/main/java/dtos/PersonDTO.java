@@ -18,7 +18,7 @@ public class PersonDTO {
     private String lName;
     private String phone;
 
-    private long id;
+    private int id;
 
     public PersonDTO(Person p) {
         this.fName = p.getfName();
@@ -64,7 +64,7 @@ public class PersonDTO {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

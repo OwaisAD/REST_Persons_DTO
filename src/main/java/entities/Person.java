@@ -22,7 +22,7 @@ public class Person implements Serializable {
     private Date edited;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     public Person() {
     }
@@ -81,11 +81,11 @@ public class Person implements Serializable {
         this.edited = edited;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
