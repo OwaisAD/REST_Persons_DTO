@@ -106,6 +106,22 @@ public class PersonFacade implements IPersonFacade {
 
     @Override
     public PersonDTO editPerson(PersonDTO p) {
-        return null;
+        EntityManager em = emf.createEntityManager();
+
+        Person fromDB = em.find(Person.class, p.getId());
+
+        if(fromDB == null) {
+            throw new EntityNotFoundException("No such person with id: " + p.getId());
+        }
+
+        Person personEntity = new Person(p.getfName(), p.getlName(), p.getPhone());
+        try {
+            em.getTransaction().begin();
+            em.merge(personEntity);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new PersonDTO(personEntity);
     }
 }
